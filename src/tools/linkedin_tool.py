@@ -49,11 +49,18 @@ class LinkedInTool(BaseTool):
 
         for job in all_jobs:
             url = job.get('jobUrl', '')
-            match = re.search(r'/view/(\d+)', url)
-            job_id = match.group(1) if match else url
-            if url and url not in unique_jobs:
+            if not url:
+                continue
+
+            clean_url = url.split('?')[0].strip()
+            job['jobUrl'] = clean_url
+
+            match = re.search(r'/jobs/view/(\d+)', clean_url)
+            job_id = match.group(1) if match else clean_url
+
+            if job_id not in unique_jobs:
                 unique_jobs[job_id] = job
-        
-        final_jobs = list(unique_jobs.values())
+            
+            final_jobs = list(unique_jobs.values())
 
         return final_jobs
