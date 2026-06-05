@@ -1,6 +1,6 @@
 # AI-Powered Job Search Agent
 
-An intelligent agent designed to automate the search and filtering of DevOps/Cloud & Backend Engineer roles. This project specifically targets the French and German markets, with a focus on architectural clean code and cost-optimized AI processing.
+An intelligent agent designed to automate the search and filtering of DevOps/Cloud & Backend Engineer roles. This project specifically targets the French and Belgium markets, with a focus on architectural clean code and cost-optimized AI processing.
 
 This project demonstrates full-stack automation skills, integrating external APIs with LLM intelligence to drastically reduce job board noise while maintaining high precision in criteria matching.
 
@@ -23,9 +23,9 @@ This project demonstrates full-stack automation skills, integrating external API
 ---
 
 ## Features
-* **Multi-market search**: Automated scraping for relevant positions across France and Germany.
+* **Multi-market search**: Automated API calls for relevant positions across France and Belgium.
 * **Filtering pipeline (AI Screening)**: GPT-4o-mini validation of experience limits, contract-type, salary...
-* **Intelligent localization**: Context-aware geographic validation and language requirement assessment.
+* **Intelligent localization**: Context-aware geographic validation.
 * **Dynamic Excel export**: Automated generation of styled reports with conditional formatting and status dropdown menus.
 
 ---
@@ -99,5 +99,5 @@ The project follows a modular, tool-based architecture:
 
 ### Scope decisions
 * **Architectural pivot (efficiency)**: Initially, the project was built using multiple autonomous CrewAI agents and tasks. However, analysis showed that the multi-agent overhead was consuming an excessive amount of tokens and increasing processing time.
-* **Streamlined pipeline**: The architecture was refactored into a custom Python loop. By using a single targeted LLM call with a precise prompt, the project achieved a **60% reduction in token consumption** and significantly faster execution times without losing analysis quality.
+* **Streamlined pipeline**: The architecture was refactored into a custom Python loop. By using a single targeted LLM call with a precise prompt, the project achieved a 60% reduction in token consumption and significantly faster execution times without losing analysis quality.
 * **Constraint handling**: default "YES" on missing data (salary/experience) to avoid false negatives.

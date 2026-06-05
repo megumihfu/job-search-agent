@@ -32,7 +32,7 @@ def run_job_agent():
         for job in job_offers:
             prompt = f"""
             ROLE: Expert IT Recruitment Screener.
-            CONTEXT: The candidate is looking for Backend/Cloud roles in France OR Germany.
+            CONTEXT: The candidate is looking for Backend/Cloud roles in France OR Belgium.
             BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (DevOps, SRE, Cloud, Backend, Software Engineer) keep it.
             
             FILTERS:
