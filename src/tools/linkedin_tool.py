@@ -10,7 +10,7 @@ class LinkedInTool(BaseTool):
         keywords = ["devops", "cloud engineer", "backend engineer"]
         job_types = ["full time", "temporary"]
         experience = ["entry level", "associate"]
-        locations = ["France", "Germany"]
+        locations = ["France", "Belgium"]
 
         all_jobs = []
 

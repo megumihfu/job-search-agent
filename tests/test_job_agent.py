@@ -51,7 +51,7 @@ def test_job_agent_rejection(mock_excel, mock_llm, mock_linkedin):
 @patch('src.agents.job_agent.excel_tool._run')
 def test_job_agent_quota_error(mock_excel, mock_llm, mock_linkedin):
     # Check if the agent handles LLM quota errors gracefully and still calls Excel export
-    mock_linkedin.return_value = [{'position': 'DevOps', 'target_country': 'Germany'}]
+    mock_linkedin.return_value = [{'position': 'DevOps', 'target_country': 'Belgium'}]
     
     mock_llm.side_effect = Exception("Rate limit reached (429)")
     
