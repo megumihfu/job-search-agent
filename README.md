@@ -1,6 +1,6 @@
 # AI-Powered Job Hunter
 
-An intelligent agent designed to automate the search and filtering of DevOps/Cloud & Backend Engineer roles. This project specifically targets the French and Belgium markets, with a focus on architectural clean code and cost-optimized AI processing.
+An intelligent agent designed to automate the search and filtering of DevOps/Cloud & Backend Engineer roles. This project specifically targets the EU markets, with a focus on architectural clean code and cost-optimized AI processing.
 
 This project demonstrates full-stack automation skills, integrating external APIs with LLM intelligence to drastically reduce job board noise while maintaining high precision in criteria matching.
 
@@ -21,7 +21,7 @@ This project demonstrates full-stack automation skills, integrating external API
 ---
 
 ## Features
-* **Multi-market search**: Automated API calls for relevant positions across France and Belgium.
+* **Multi-market search**: Automated scraping for relevant positions across EU.
 * **Filtering pipeline (AI Screening)**: GPT-4o-mini validation of experience limits, contract-type, salary...
 * **Intelligent localization**: Context-aware geographic validation.
 * **Dynamic Excel export**: Automated generation of styled reports with conditional formatting and status dropdown menus.

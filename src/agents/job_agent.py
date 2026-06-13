@@ -44,7 +44,8 @@ def run_job_agent():
             4. SECTOR: Only reject if the COMPANY itself is a Bank, Insurance, or Defense firm.
             5. CONTRACT: permanent or temporary. REJECT intern/apprentice & contract.
             6. LOCATION: The candidate accepts ALL cities in {job.get('target_country')}. 
-            7. FINAL DECISION: If you are unsure or data is missing, the default answer is YES.
+            7. LANGUAGE: Check if there is no need to be fluent in Deutsch. Only needed French AND/OR English.
+            8. FINAL DECISION: If you are unsure or data is missing, the default answer is YES.
 
             DATA:
             - Job: {job.get('position')} @ {job.get('company')}
