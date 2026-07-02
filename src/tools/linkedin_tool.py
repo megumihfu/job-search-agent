@@ -7,10 +7,10 @@ class LinkedInTool(BaseTool):
     description: str = "Search jobs on linkedin and return raw data"
     
     def _run(self) -> list:
-        keywords = ["devops", "cloud engineer", "backend engineer"]
+        keywords = ["cloud engineer", "backend engineer"]
         job_types = ["full time", "temporary"]
         experience = ["entry level", "associate"]
-        locations = ["France", "Belgium", "Germany"]
+        locations = ["France", "Belgium", "Malaysia", "Singapore"]
 
         all_jobs = []
 

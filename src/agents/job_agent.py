@@ -40,11 +40,11 @@ def run_job_agent():
                 - for backend/fullstack/software roles: must include either Python, Java, or Kotlin. 
                 - for DevOps/SRE/Cloud: DO NOT reject if a langage isnt mentioned. 
             2. TECH FOCUS: REJECT non-IT jobs.
-            3. EXPERIENCE: Entry-level to max 4 years. If the title has "Senior" or "Lead", REJECT.
+            3. EXPERIENCE: Entry-level to max 4 years. If the title has "Senior", "Staff", "Platform" or "Lead", REJECT.
             4. SECTOR: Only reject if the COMPANY itself is a Bank, Insurance, or Defense firm.
-            5. CONTRACT: permanent or temporary. REJECT intern/apprentice & contract.
+            5. CONTRACT: permanent, temporary or V.I.E. REJECT intern/apprentice & contract.
             6. LOCATION: The candidate accepts ALL cities in {job.get('target_country')}. 
-            7. LANGUAGE: Check if there is no need to be fluent in Deutsch. Only needed French AND/OR English.
+            7. LANGUAGE: Check if the languages needed are ONLY French AND/OR English.
             8. FINAL DECISION: If you are unsure or data is missing, the default answer is YES.
 
             DATA:
