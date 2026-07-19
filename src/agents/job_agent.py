@@ -32,13 +32,11 @@ def run_job_agent():
         for job in job_offers:
             prompt = f"""
             ROLE: Expert IT Recruitment Screener.
-            CONTEXT: The candidate is looking for Backend/Cloud roles in France, Belgium, Singapore or Malaysia.
-            BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (DevOps, SRE, Cloud, Backend, Software Engineer) keep it.
+            CONTEXT: The candidate is looking for software development roles in France, Belgium, UK, Germany, Singapore or Malaysia.
+            BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (Backend, Software Engineer) keep it.
             
             FILTERS:
-            1. STACK: 
-                - for backend/fullstack/software roles: must include either Python, Java, or Kotlin. 
-                - for DevOps/SRE/Cloud: DO NOT reject if a language isnt mentioned. 
+            1. STACK: must include either Python, Java, or Kotlin. 
             2. TECH FOCUS: REJECT non-IT jobs.
             3. EXPERIENCE: Entry-level to max 4 years. If the title has "Senior", "Staff", "Platform" or "Lead", REJECT.
             4. SECTOR: Only reject if the COMPANY itself is a Bank, Insurance, or Defense firm.
