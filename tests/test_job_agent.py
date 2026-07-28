@@ -38,7 +38,9 @@ def test_job_agent_rejection(mock_excel, mock_llm, mock_linkedin):
         'target_country': 'France'
     }]
     
-    mock_llm.return_value = "NO - sector not allowed (banking)"
+    mock_llm.return_value = json.dumps({
+        "1": {"decision": "NO", "reason": "sector not allowed (banking)"}
+    })
     
     from src.agents.job_agent import run_job_agent
     run_job_agent()
