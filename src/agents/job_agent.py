@@ -95,50 +95,56 @@ def run_job_agent():
     print(f"Jobs remaining for LLM: {len(filtered_jobs)}")
     
     valid_jobs = []
-    batch_size = 2
+    batch_size = 3
 
     try:
-        for i in range(0,len(filtered_jobs), batch_size):
-            batch = filtered_jobs[i:i+batch_size]
-
+        for i in range(0, len(filtered_jobs), batch_size):
+            batch = filtered_jobs[i:i + batch_size]
             jobs_txt = ""
         
-        for index, j in enumerate(batch, 1):
-            jobs_txt += f"""
-                    --- JOB {index} ---
-                    Position: {j.get('position')} @ {j.get('company')}
-                    City: {j.get('location')}
-                    Country: {j.get('target_country')}
-                    Description: {j.get('description', 'N/A')[:600]}
-                """
+            for index, j in enumerate(batch, 1):
+                jobs_txt += f"""
+--- JOB {index} ---
+Position: {j.get('position')} @ {j.get('company')}
+City: {j.get('location')}
+Country: {j.get('target_country')}
+Description: {j.get('description', 'N/A')}
+"""
+
             prompt = f"""
-                ROLE: Expert IT Recruitment Screener.
-                CONTEXT: The candidate is looking for software development roles in France, Belgium, UK, Germany, Singapore or Malaysia.
-                BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (Backend, Software Engineer), keep it.
+ROLE: Expert IT Recruitment Screener.
+CONTEXT: The candidate is looking for software development roles in France, Belgium, UK, Germany, Singapore or Malaysia.
+BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (Backend, Software Engineer), keep it.
 
-                FILTERS:
-                1. STACK: Must include either Python, Java, or Kotlin.
-                2. TECH FOCUS: REJECT non-IT jobs.
-                3. EXPERIENCE: Entry-level to max 4 years. REJECT if title has "Senior", "Staff", "Platform" or "Lead".
-                4. SECTOR: Only REJECT if the COMPANY itself is a Bank, Insurance, or Defense firm.
-                5. CONTRACT: Permanent, temporary or V.I.E. REJECT intern/apprentice & contract.
-                6. LOCATION: The candidate accepts ALL cities in the target country context.
-                7. LANGUAGE: Check if the languages needed are ONLY French AND/OR English.
-                8. FINAL DECISION: If you are unsure or data is missing, the default answer is YES.
+FILTERS:
+1. STACK: Must include either Python, Java, or Kotlin.
+2. TECH FOCUS: REJECT non-IT jobs.
+3. EXPERIENCE: Entry-level to max 4 years. REJECT if title has "Senior", "Staff", "Platform" or "Lead".
+4. SECTOR: Only REJECT if the COMPANY itself is a Bank, Insurance, or Defense firm.
+5. CONTRACT: Permanent, temporary or V.I.E. REJECT intern/apprentice & contract.
+6. LOCATION: The candidate accepts ALL cities in the target country context.
+7. LANGUAGE: Check if the languages needed are ONLY French AND/OR English.
+8. FINAL DECISION: If you are unsure or data is missing, the default answer is YES.
 
-                Evaluate each job below and return ONLY a valid JSON object matching this exact structure:
-                {{
-                "1": {{"decision": "YES" or "NO", "reason": "short explanation"}},
-                "2": {{"decision": "YES" or "NO", "reason": "short explanation"}}
-                }}
+Evaluate each job below and return ONLY a valid JSON object matching this exact structure:
+{{
+  "1": {{"decision": "YES" or "NO", "reason": "short explanation"}},
+  "2": {{"decision": "YES" or "NO", "reason": "short explanation"}}
+}}
 
-                JOBS TO EVALUATE:
-                {jobs_txt}
-            """
-        
+JOBS TO EVALUATE:
+{jobs_txt}
+"""
+
             try:
                 response = llm.call(prompt)
-                clean_response = response.strip().strip("```json").strip("```").strip()
+                
+                clean_response = response.strip()
+                if "```json" in clean_response:
+                    clean_response = clean_response.split("```json")[1].split("```")[0].strip()
+                elif "```" in clean_response:
+                    clean_response = clean_response.split("```")[1].strip()
+
                 evals = json.loads(clean_response)
 
                 for index, j in enumerate(batch, 1):
@@ -147,19 +153,20 @@ def run_job_agent():
                     reason = eval_data.get("reason", "No reason provided")
                     print(f"{j.get('position', '')[:40]}... {decision} ({reason})")
 
-                    if "YES" in decision:
+                    if "YES" in str(decision).upper():
                         valid_jobs.append(j)
+
             except json.JSONDecodeError:
-                print(f"Warning: failed to parse JSON response at index {i}")
+                print(f"Warning: failed to parse JSON response at index {i}. Keeping batch by default.")
                 valid_jobs.extend(batch)
                     
             except Exception as e:
                 error_msg = str(e).lower()
-                if any(x in error_msg for x in ["429", "limited", "TOO_MANY_REQUESTS"]):
+                if any(x in error_msg for x in ["429", "limited", "too_many_requests"]):
                     print("\nAPI quota exceeded. Saving progress and exiting...")
                     break
                 else:
-                    print(f"Error for this job '{job.get('position', '')}': {e}")
+                    print(f"Error on batch starting at index {i}: {e}")
                     continue
     
     except Exception as e:
