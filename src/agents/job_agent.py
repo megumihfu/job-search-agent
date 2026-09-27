@@ -113,14 +113,14 @@ Description: {j.get('description', 'N/A')}
 
             prompt = f"""
 ROLE: Expert IT Recruitment Screener.
-CONTEXT: The candidate is looking for software development roles in France, Belgium, UK, Germany, Singapore or Malaysia.
-BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (Backend, Software Engineer), keep it.
+CONTEXT: The candidate is looking for software development or cloud roles in France, Belgium, Spain, Luxembourg, Germany.
+BENEFIT OF THE DOUBT: If the job description is missing or empty, but the JOB TITLE matches (Backend, Software Engineer, Cloud, DevOps), keep it.
 
 FILTERS:
-1. STACK: Must include either Python, Java, or Kotlin.
+1. STACK: IF SOFTWARE role, it must include either Python, Java, or Kotlin.
 2. TECH FOCUS: REJECT non-IT jobs.
 3. EXPERIENCE: Entry-level to max 4 years. REJECT if title has "Senior", "Staff", "Platform" or "Lead".
-4. SECTOR: Only REJECT if the COMPANY itself is a Bank, Insurance, or Defense firm.
+4. SECTOR: Only REJECT if the COMPANY itself is a Bank or Insurance firm.
 5. CONTRACT: Permanent, temporary or V.I.E. REJECT intern/apprentice & contract.
 6. LOCATION: The candidate accepts ALL cities in the target country context.
 7. LANGUAGE: Check if the languages needed are ONLY French AND/OR English.
