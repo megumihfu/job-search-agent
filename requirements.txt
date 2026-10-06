@@ -6,3 +6,4 @@ openpyxl
 linkedin-jobs-api-py
 pytest
 pytest-mock
+selectolax<1.0.0
